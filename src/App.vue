@@ -26,6 +26,7 @@ body {
     background-image: url(./assets/background.gif);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,6 +39,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #fff;
+  font-size:14px;
 
 }
 

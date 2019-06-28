@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show">
+  <div class="box" v-if="show">
     <!-- <h1>{{ items.location.name }}</h1> -->
      <!-- <p>{{ items.current.feelslike_c }}</p>
      <p>{{ items.current.last_updated }}</p>
@@ -91,8 +91,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-table {
+.box {
   width: 100%;
+}
+table {
   background-color:#fff;
   padding: 1rem;
   margin: 1rem;
@@ -109,7 +111,18 @@ td {
 }
 
 span.updated {
-  font-size:0.6em;
+  font-size:0.5em;
   }
-
+@media (max-width:600px) {
+  table {
+    margin: O auto;
+  }
+  caption {
+    font-size:1.2em;
+  }
+  td {
+    font-size:1em;
+    padding:0.25rem;
+  }
+}
 </style>
