@@ -8,11 +8,11 @@
               <caption>MumUMidex Challenge</caption>
 
         <tr
-          v-for="(item, ObjKey) in orderedTemp"
-          :key="item.id"
+          v-for="(item, index) in orderedTemp"
+          :key="index"
         >
         <td>
-          {{ObjKey + 1}}
+          {{index + 1}}
         </td>
         <td>
           {{item.location.name}}
@@ -67,7 +67,7 @@ export default {
     var myUrl;
 
     cities.forEach(function(element){
-      myUrl = apiUrl+'?'+element;
+      myUrl = apiUrl+element;
       promises.push(axios.get(myUrl))
     });``
     let self = this;
@@ -96,14 +96,15 @@ export default {
 }
 table {
   background-color:#fff;
-  padding: 1rem;
-  margin: 1rem;
+  padding: 2rem;
   color: indianred;
 }
 caption {
   background:#FFF;
-  font-size:3rem;
+  font-size:2rem;
   color: indianred;
+  font-weight: 900;
+  padding: 0.5rem 0;
 }
 td {
     padding:1rem;
@@ -118,11 +119,11 @@ span.updated {
     margin: O auto;
   }
   caption {
-    font-size:1.2em;
+    font-size:1.1em;
   }
   td {
     font-size:1em;
-    padding:0.25rem;
+    padding:0.5rem;
   }
 }
 </style>
