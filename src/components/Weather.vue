@@ -20,9 +20,9 @@
         <td>
           {{item.current.feelslike_c}} ({{item.current.temp_c}})
         </td>  
-        <td>
+        <!-- <td>
           <span class="updated">{{item.current.last_updated}}</span>
-        </td>
+        </td> -->
         </tr>
       </table>
       
