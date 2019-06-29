@@ -1,19 +1,16 @@
 <template>
   <div id="app">
-    <!-- <Logo  /> -->
     <Weather />
   </div>
 </template>
 
 <script>
 import Weather from './components/Weather.vue'
-import Logo from './components/Logo.vue'
 
 export default {
   name: 'app',
   components: {
-    Weather,
-    Logo
+    Weather
   }
 }
 </script>
