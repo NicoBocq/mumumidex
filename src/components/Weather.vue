@@ -31,7 +31,14 @@
 
 <script>
 
-const cities = ['Marseille', 'Valence', 'Paris', 'Montpellier', 'Miami', 'San Francisco', 'Lyon', 'Le Castellet']
+const cities = ['Marseille',
+'Valence',
+'Paris',
+'Montpellier',
+'Miami',
+'San Francisco',
+'Lyon',
+'Le Castellet']
 // const apiUrl = 'http://localhost:3000/current'
 const apiUrl = "https://api.apixu.com/v1/current.json?key=166fba8a30324b87be8203006192606&q="
 
