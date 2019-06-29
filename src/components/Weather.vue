@@ -57,24 +57,11 @@ export default {
       return _.orderBy(this.items, ['current.feelslike_c', 'current.temp_c'], ['desc', 'desc'])
     }
   },
-  mounted () {
-  //   function getApi() {
-  //     cities.forEach(function(element) {
-  //       return axios.get(apiUrl + cities[element]);
-  //   });
-  //   this.items = getApi();
-  //   }
-  // }
-  // axios.all([getApi()])
-  //   .then(axios.spread(function (acct, perms) {
-  //     // response => (this.items = response.data)
-  //   }));
-
+  mounted: function () {
     const promises = [];
-    var myUrl;
 
     cities.forEach(function(element){
-      myUrl = apiUrl+element;
+      const myUrl = apiUrl+element;
       promises.push(axios.get(myUrl))
     });``
     let self = this;
@@ -87,11 +74,6 @@ export default {
         // // response => (this.items = response.data)
         self.show = true
     }));
-    // axios.all(promises).then(function(results) {
-    //     results.forEach(function(response) {
-    //         mainObject[response.identifier] = response.data;
-    //     })
-    // });
   }
 }
 </script>
@@ -103,13 +85,13 @@ export default {
 }
 table {
   background-color:#fff;
-  padding: 2rem;
+  padding: 1rem;
   color: indianred;
 }
 caption {
   background:#FFF;
   font-size:2rem;
-  color: indianred;
+  color: rgb(156, 33, 33);
   font-weight: 900;
   padding: 0.5rem 0;
 }
