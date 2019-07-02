@@ -1,11 +1,5 @@
 <template>
   <div class="box" v-if="show">
-    <!-- <h1>{{ items.location.name }}</h1> -->
-     <!-- <p>{{ items.current.feelslike_c }}</p>
-     <p>{{ items.current.last_updated }}</p>
-      -->
-    
-
     <div class="items">
       <h1>MumUMidex Challenge</h1>
       <div
@@ -19,16 +13,21 @@
         <div class="city">
           {{item.location.name}}
         </div>
-        <div class="temp">
-          <div class="humidex">
-            {{ getHumidex(item) }}
+        <div class="humidex">
+          {{ getHumidex(item) }}
+        </div>
+        <div class="tempsuite">
+          <div class="temp">
+            <font-awesome-icon icon="thermometer-empty" />
+            {{item.current.temp_c}}°
           </div>
-          <div class="tempsuite">
-            T : {{item.current.temp_c}} / H : {{item.current.humidity}}
-          </div> 
+          <div class="humidity">
+            <font-awesome-icon icon="tint" />
+            {{item.current.humidity}}%
+          </div>
+        </div> 
       </div>
-      </div>
-  </div>
+    </div>
   </div>
 </template>
 
@@ -117,7 +116,7 @@ h1 {
 .items > div {
   margin-bottom:1rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   align-items: center;
   border-radius: 0.2rem;
 }
@@ -126,17 +125,23 @@ h1 {
   text-align: left;
 }
 
-.temp {
+.data {
   padding: 0.5rem;
 }
 
 .tempsuite {
-  font-size:0.7em;
+  text-align: left;
+  font-size:0.9em;
 }
+
+/* .humidity, .temp {
+
+} */
 
 .humidex {
   font-size:2em;
   font-weight:900;
+  padding: 0.5rem;
 }
 
 .un {
@@ -157,6 +162,12 @@ h1 {
 
 .cinq {
   background-color: brown;
+}
+
+@media (max-width:600px) {
+  .items {
+      padding:1rem;
+  }
 }
 
 </style>

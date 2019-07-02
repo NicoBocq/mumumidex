@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <Weather />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Weather from './components/Weather.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'app',
   components: {
-    Weather
+    Weather,
+    Footer
   }
 }
 </script>
@@ -39,6 +42,7 @@ body {
   text-align: center;
   color: #fff;
   font-size:14px;
+  position: relative;
 }
 
 @media (max-width: 600px) {
