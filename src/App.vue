@@ -23,17 +23,11 @@ body {
 body {
     padding:0;
     margin:0;
-    background-color: indianred;
+    background-color:#000;
     background-image: url(./assets/background.gif);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    
-
+    background-position: center center;    
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -42,6 +36,10 @@ body {
   text-align: center;
   color: #fff;
   font-size:14px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 

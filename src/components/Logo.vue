@@ -85,7 +85,6 @@
 	align-items: center;
 }
 h1 {
-  font-size:3em;
 	margin: 0;
 	padding:0;
 
