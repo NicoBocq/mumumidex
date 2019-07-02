@@ -27,7 +27,10 @@ body {
     background-image: url(./assets/background.gif);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;    
+    background-position: center center;  
+        display: flex;
+    justify-content: center;
+    align-items: center;  
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -37,9 +40,7 @@ body {
   color: #fff;
   font-size:14px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
 
 }
 
