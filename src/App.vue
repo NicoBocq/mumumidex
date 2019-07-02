@@ -39,9 +39,14 @@ body {
   text-align: center;
   color: #fff;
   font-size:14px;
-
-
-
 }
+
+@media (max-width: 600px) {
+  html, 
+body {
+    height: auto;
+}
+}
+
 
 </style>
