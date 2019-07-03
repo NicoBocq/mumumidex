@@ -39,8 +39,7 @@ const cities = ['Marseille',
 'Montpellier',
 'Miami',
 'San Francisco',
-'Lyon',
-'Tokyo'];
+'Lyon'];
 // const apiUrl = 'http://localhost:3000/current'
 const apiUrl = "https://api.apixu.com/v1/current.json?key=166fba8a30324b87be8203006192606&q="
 
