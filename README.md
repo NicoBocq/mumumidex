@@ -1,4 +1,4 @@
-# mumumidex
+# MumUMidex
 
 ## Project setup
 ```
