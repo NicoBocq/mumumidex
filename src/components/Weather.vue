@@ -5,7 +5,7 @@
       <div
         v-for="(item, index) in orderedTemp"
         :key="index"
-        :class="getClass(getHumidex(item))"
+        :class="getClass(getHumidex(item.current))"
       >
         <div>
           {{index + 1}}
@@ -14,7 +14,7 @@
           {{item.location.name}}
         </div>
         <div class="humidex">
-          {{ getHumidex(item) }}
+          {{ getHumidex(item.current) }}
         </div>
         <div class="tempsuite">
           <div class="temp">
@@ -55,13 +55,13 @@ export default {
   },
   computed: {
     orderedTemp: function () {
-      return _.orderBy(this.items, ['current.feelslike_c', 'current.temp_c'], ['desc', 'desc'])
+      return _.orderBy(this.items, ['current.temp_c'], ['desc'])
     },
   },
   methods: {
     getHumidex: function (el) {
-      const e = 6.112 * Math.pow(10,(7.5*el.current.temp_c/(237.7+el.current.temp_c)))*(el.current.humidity/100)
-      return Math.round(el.current.temp_c + 5/9 * (e-10))
+      const e = 6.112 * Math.pow(10,(7.5*el.temp_c/(237.7+el.temp_c)))*(el.humidity/100)
+      return Math.round(el.temp_c + 5/9 * (e-10))
     },
     getClass: function(e) {
       if (e <= 29 )
@@ -153,7 +153,7 @@ h1 {
 }
 
 .trois {
-  background-color: sandybrown;
+  background-color:orange;
 }
 
 .quatre {
