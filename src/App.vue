@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header />
     <Weather />
     <Footer />
   </div>
@@ -8,12 +9,15 @@
 <script>
 import Weather from './components/Weather.vue'
 import Footer from './components/Footer.vue'
+import Header from './components/Header.vue'
+
 
 export default {
   name: 'app',
   components: {
     Weather,
-    Footer
+    Footer,
+    Header
   }
 }
 </script>
@@ -43,6 +47,8 @@ body {
   color: #fff;
   font-size:14px;
   position: relative;
+  background: rgba(0, 0, 0, 0.6);
+  padding:2rem;
 }
 
 @media (max-width: 600px) {
@@ -50,6 +56,9 @@ body {
 body {
     height: auto;
 }
+  #app {
+      padding:1rem;
+  }
 }
 
 

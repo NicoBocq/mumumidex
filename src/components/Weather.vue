@@ -1,31 +1,38 @@
 <template>
-  <div class="box" v-if="show">
-    <div class="items">
-      <h1>MumUMidex Challenge</h1>
-      <div
-        v-for="(item, index) in orderedTemp"
-        :key="index"
-        :class="getClass(getHumidex(item.current))"
-      >
-        <div>
-          {{index + 1}}
-        </div>
-        <div class="city">
-          {{item.location.name}}
-        </div>
-        <div class="humidex">
-          {{ getHumidex(item.current) }}
-        </div>
-        <div class="tempsuite">
-          <div class="temp">
-            <font-awesome-icon icon="thermometer-empty" />
-            {{item.current.temp_c}}°
+  <div>
+    <div class="loading" v-if="!show">
+        <img src="@/assets/logo.png" />
+    </div>
+    <div class="box" v-if="show">
+      <div class="update">
+        Mise à jour : {{ items[0].current.last_updated }}
+      </div>
+      <div class="items">                  
+        <div
+          v-for="(item, index) in orderedTemp"
+          :key="index"
+          :class="getClass(getHumidex(item.current))"
+        >
+          <div>
+            {{index + 1}}
           </div>
-          <div class="humidity">
-            <font-awesome-icon icon="tint" />
-            {{item.current.humidity}}%
+          <div class="city">
+            {{item.location.name}}
           </div>
-        </div> 
+          <div class="humidex">
+            {{ getHumidex(item.current) }}
+          </div>
+          <div class="tempsuite">
+            <div class="temp">
+              <font-awesome-icon icon="thermometer-empty" />
+              {{item.current.temp_c}}°
+            </div>
+            <div class="humidity">
+              <font-awesome-icon icon="tint" />
+              {{item.current.humidity}}%
+            </div>
+          </div> 
+        </div>
       </div>
     </div>
   </div>
@@ -50,13 +57,13 @@ export default {
   data () {
     return {
       items:[],
-      show: false
+      show: false,
     } 
   },
   computed: {
     orderedTemp: function () {
       return _.orderBy(this.items, ['current.temp_c'], ['desc'])
-    },
+    }
   },
   methods: {
     getHumidex: function (el) {
@@ -100,16 +107,20 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-h1 {
-  font-size:1.4em;
-  font-weight: 700;
-  margin-top:0;
+.loading {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.update {
+  font-size:0.8;
+  text-align: right;
+  margin-bottom: 0.25rem;
 }
 
 .items {
-  background: rgba(0, 0, 0, 0.6);
-  padding:2rem;
-  
   font-size:1.3em;
 }
 
@@ -133,10 +144,6 @@ h1 {
   text-align: left;
   font-size:0.9em;
 }
-
-/* .humidity, .temp {
-
-} */
 
 .humidex {
   font-size:2em;
@@ -164,10 +171,19 @@ h1 {
   background-color: brown;
 }
 
-@media (max-width:600px) {
-  .items {
-      padding:1rem;
+.loading {
+   animation: rotation 1s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
   }
 }
+
+
 
 </style>
