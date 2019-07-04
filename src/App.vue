@@ -23,7 +23,7 @@
           icon
           @click="snackWithButtons = false"
         >
-          <v-icon>close</v-icon>
+          Close
         </v-btn>
       </v-snackbar>
     </v-content>
