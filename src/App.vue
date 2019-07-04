@@ -73,8 +73,8 @@ export default {
       // The new service worker is installed, but not yet active.
       // Store the ServiceWorkerRegistration instance for later use.
       this.registration = e.detail;
-      this.snackBtnText = 'Refresh';
-      this.snackWithBtnText = 'New version available!';
+      this.snackBtnText = 'Rafraîchir';
+      this.snackWithBtnText = 'Nouvelle version disponible les bananes';
       this.snackWithButtons = true;
     },
     refreshApp () {

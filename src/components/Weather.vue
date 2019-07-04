@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="loading" v-if="!show">
-        <img src="@/assets/logo.png" />
+    <div class="loading" v-if="show">
+        <img src="@/assets/loading.png" />
     </div>
-    <div class="box" v-if="show">
+    <div class="box" v-if="!show">
       <div class="update">
         Mise à jour : {{ items[0].current.last_updated }}
       </div>
@@ -108,7 +108,11 @@ export default {
 <style scoped>
 
 .loading {
-  height: 400px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
