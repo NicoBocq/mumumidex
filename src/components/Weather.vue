@@ -75,7 +75,7 @@ export default {
         return 'un'
       else if (e > 29 && e <= 39)
         return 'deux'
-      else if (e > 40 && e <= 45)
+      else if (e > 39 && e <= 45)
         return 'trois'
       else if (e > 45 && e <= 54)
         return 'quatre'
