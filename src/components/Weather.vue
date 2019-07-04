@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <v-container>
+    <h1>MumUM<font-awesome-icon icon="thermometer-three-quarters" />dex Challenge</h1>
     <div class="loading" v-if="!show">
         <img src="@/assets/loading.png" />
     </div>
-    <div class="box" v-if="show">
+    <v-layout align-center justify-center column fill-height v-if="show">
       <div class="update">
         Mise à jour : {{ items[0].current.last_updated }}
       </div>
@@ -34,8 +35,8 @@
           </div> 
         </div>
       </div>
-    </div>
-  </div>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

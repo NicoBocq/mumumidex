@@ -1,6 +1,8 @@
 <template>
-  <div id="app">
-
+  <v-app dark id="app">
+    <video playsinline autoplay muted loop>
+        <source :src='require("@/assets/background.mp4")' type='video/mp4'>
+    </video>
     <v-content>
       <v-snackbar
         v-model="snackWithButtons"
@@ -30,21 +32,18 @@
     <Header />
     <Weather />
     <Footer />
-  </div>
+  </v-app>
 </template>
 
 <script>
 import Weather from './components/Weather.vue'
 import Footer from './components/Footer.vue'
-import Header from './components/Header.vue'
-
 
 export default {
   name: 'app',
   components: {
     Weather,
     Footer,
-    Header
   },
   data () {
     return {
@@ -95,14 +94,14 @@ body {
 body {
     padding:0;
     margin:0;
-    background-color:#000;
+    /* background-color:#000;
     background-image: url(./assets/background.gif);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;  
         display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;   */
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -111,19 +110,25 @@ body {
   text-align: center;
   color: #fff;
   font-size:14px;
-  position: relative;
   background: rgba(0, 0, 0, 0.6);
-  padding:2rem;
 }
+
+ video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  overflow: hidden;
+  z-index: -100;
+ }
 
 @media (max-width: 600px) {
   html, 
 body {
     height: auto;
 }
-  #app {
-      padding:1rem;
-  }
+
 }
 
 

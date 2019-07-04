@@ -12,8 +12,8 @@ footer {
  text-align: right;
  position: absolute;
  bottom: 0;
- right: 0;
- padding: 0.5rem;
+ right: 1rem;
+ padding: 1rem;
 }
 
 footer a {
