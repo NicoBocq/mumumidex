@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>MumUM<font-awesome-icon icon="thermometer-three-quarters" />dex Challenge</h1>
+    <h1>MumUM<font-awesome-icon icon="hand-middle-finger" />dex Challenge</h1>
     <div class="loading" v-if="!show">
         <img src="@/assets/loading.png" />
     </div>

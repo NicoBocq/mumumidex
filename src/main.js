@@ -9,10 +9,10 @@ Vue.use(Vuetify)
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThermometerEmpty, faTint, faThermometerThreeQuarters } from '@fortawesome/free-solid-svg-icons'
+import { faThermometerEmpty, faTint, faThermometerThreeQuarters, faHandMiddleFinger} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faThermometerEmpty, faTint, faThermometerThreeQuarters)
+library.add(faThermometerEmpty, faTint, faThermometerThreeQuarters, faHandMiddleFinger)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
