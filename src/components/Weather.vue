@@ -175,6 +175,10 @@ export default {
    animation: rotation 1s infinite linear;
 }
 
+.loading img {
+  width:50px;
+}
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);

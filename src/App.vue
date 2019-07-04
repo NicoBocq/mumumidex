@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <button
-      v-if="updateExists"
-      @click="refreshApp"
-    >
-      New version available! Click to update
-    </button>
+  <button
+    v-if="updateExists"
+    @click="refreshApp"
+  >
+    New version available! Click to update
+  </button>
     <Header />
     <Weather />
     <Footer />
