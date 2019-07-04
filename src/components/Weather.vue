@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="loading" v-if="show">
+    <div class="loading" v-if="!show">
         <img src="@/assets/loading.png" />
     </div>
-    <div class="box" v-if="!show">
+    <div class="box" v-if="show">
       <div class="update">
         Mise à jour : {{ items[0].current.last_updated }}
       </div>
