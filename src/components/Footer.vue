@@ -1,6 +1,6 @@
 <template>
  <footer>
-  V1 - <a href="https://github.com/NicoBocq" target="-blank">
+  <a href="https://github.com/NicoBocq" target="-blank">
    @NicoBocq
   </a>
  </footer>
