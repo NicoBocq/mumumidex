@@ -8,10 +8,7 @@
 
 <style scoped>
 footer {
- text-align: right;
- position: absolute;
- bottom: 0;
- right: 0;
+text-align: right;
  padding: 1rem;
 }
 
