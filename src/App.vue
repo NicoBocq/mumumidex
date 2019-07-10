@@ -7,8 +7,9 @@
       <v-snackbar
         v-model="snackWithButtons"
         :timeout="timeout"
-        top
+        bottom
         class="snack"
+        :multi-line=true
       >
         {{ snackWithBtnText }}
         <v-spacer />
@@ -24,7 +25,7 @@
           icon
           @click="snackWithButtons = false"
         >
-          Close
+          Fermer
         </v-btn>
       </v-snackbar>
     </v-content>
@@ -71,8 +72,8 @@ export default {
       // The new service worker is installed, but not yet active.
       // Store the ServiceWorkerRegistration instance for later use.
       this.registration = e.detail;
-      this.snackBtnText = 'Rafraîchir';
-      this.snackWithBtnText = 'Nouvelle version disponible les bananes';
+      this.snackBtnText = 'Mettre à jour';
+      this.snackWithBtnText = 'Nouvelle version disponible';
       this.snackWithButtons = true;
     },
     refreshApp () {

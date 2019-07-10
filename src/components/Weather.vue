@@ -8,33 +8,33 @@
       <div class="update">
         Mise à jour : {{ items[0].current.last_updated }}
       </div>
-      <div class="items">                  
-        <div
-          v-for="(item, index) in sortHumidex"
-          :key="index"
-          :class="getClass(getHumidex(item))"
-        >
-          <div>
-            {{index + 1}}
-          </div>
-          <div class="city">
-            {{item.location.name}}
-          </div>
-          <div class="humidex">
-            {{ getHumidex(item) }}
-          </div>
-          <div class="tempsuite">
-            <div class="temp">
-              <font-awesome-icon icon="thermometer-empty" />
-              {{item.current.temp_c}}°
+        <transition-group name="flip-list" tag="div" class="items">            
+          <div
+            v-for="(item, index) in sortHumidex"
+            :key="index"
+            :class="getClass(getHumidex(item))"
+          >
+            <div>
+              {{index + 1}}
             </div>
-            <div class="humidity">
-              <font-awesome-icon icon="tint" />
-              {{item.current.humidity}}%
+            <div class="city">
+              {{item.location.name}}
             </div>
-          </div> 
-        </div>
-      </div>
+            <div class="humidex">
+              {{ getHumidex(item) }}
+            </div>
+            <div class="tempsuite">
+              <div class="temp">
+                <font-awesome-icon icon="thermometer-empty" />
+                {{item.current.temp_c}}°
+              </div>
+              <div class="humidity">
+                <font-awesome-icon icon="tint" />
+                {{item.current.humidity}}%
+              </div>
+            </div> 
+          </div>
+        </transition-group>      
     </v-layout>
   </v-container>
 </template>
@@ -65,24 +65,25 @@ export default {
       return this.items.slice().sort((a,b) => {
         return this.getHumidex(b) - this.getHumidex(a)
       })
-    } 
+    }
   },
   methods: {
-    getHumidex: function (el) {
-      const e = 6.112 * Math.pow(10,(7.5*el.current.temp_c/(237.7+el.current.temp_c)))*(el.current.humidity/100)
+    getHumidex: (el) => {
+      const e = 6.112 * Math.pow(10,(7.5*el.current.temp_c/(237.7+el.current.temp_c)))
+      *(el.current.humidity/100)
       return Math.round(el.current.temp_c + 5/9 * (e-10))
     },
-    getClass: function(e) {
+    getClass: (e) => {
       if (e <= 29 )
-        return 'un'
+        return 'bg-1'
       else if (e > 29 && e <= 39)
-        return 'deux'
+        return 'bg-2'
       else if (e > 39 && e <= 45)
-        return 'trois'
+        return 'bg-3'
       else if (e > 45 && e <= 54)
-        return 'quatre'
+        return 'bg-4'
       else
-        return 'cinq' 
+        return 'bg-5' 
     }
   },
   mounted: function () {
@@ -91,7 +92,7 @@ export default {
     cities.forEach(function(element){
       const myUrl = apiUrl+element;
       promises.push(axios.get(myUrl))
-    });``
+    });
     let self = this;
 
     axios
@@ -157,23 +158,23 @@ export default {
   padding: 0.5rem;
 }
 
-.un {
+.bg-1 {
   background-color: dodgerblue;
 }
 
-.deux {
+.bg-2 {
   background-color: lightseagreen;
 }
 
-.trois {
+.bg-3 {
   background-color:orange;
 }
 
-.quatre {
+.bg-4 {
   background-color: indianred;
 }
 
-.cinq {
+.bg-5 {
   background-color: brown;
 }
 
@@ -192,6 +193,10 @@ export default {
   to {
     transform: rotate(359deg);
   }
+}
+
+.flip-list-move {
+  transition: transform 1s;
 }
 
 
