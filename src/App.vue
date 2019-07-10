@@ -1,5 +1,5 @@
 <template>
-  <v-app dark id="app">
+  <v-app id="app">
     <video playsinline autoplay muted loop>
         <source :src='require("@/assets/background.mp4")' type='video/mp4'>
     </video>
@@ -29,7 +29,6 @@
         </v-btn>
       </v-snackbar>
     </v-content>
-    <Header />
     <Weather />
     <Footer />
   </v-app>

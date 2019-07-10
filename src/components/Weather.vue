@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <h1>MumUMidex Challenge</h1>
+    <h1 class="fade-in">
+      MumUMidex Challenge
+    </h1>
     <div class="loading" v-if="!show">
         <img src="@/assets/loading.png" />
     </div>
@@ -197,6 +199,28 @@ export default {
 
 .flip-list-move {
   transition: transform 1s;
+}
+
+.fade-in {
+	-webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 
