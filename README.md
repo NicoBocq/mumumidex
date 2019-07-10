@@ -1,5 +1,7 @@
 # MumUMidex
 
+Humidex's ranking position for selected cities. 
+
 ## Project setup
 ```
 yarn install
