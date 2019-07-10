@@ -10,9 +10,9 @@
       </div>
       <div class="items">                  
         <div
-          v-for="(item, index) in orderedTemp"
+          v-for="(item, index) in sortHumidex"
           :key="index"
-          :class="getClass(getHumidex(item.current))"
+          :class="getClass(getHumidex(item))"
         >
           <div>
             {{index + 1}}
@@ -21,7 +21,7 @@
             {{item.location.name}}
           </div>
           <div class="humidex">
-            {{ getHumidex(item.current) }}
+            {{ getHumidex(item) }}
           </div>
           <div class="tempsuite">
             <div class="temp">
@@ -52,7 +52,6 @@ const cities = ['Marseille',
 const apiUrl = "https://api.apixu.com/v1/current.json?key=166fba8a30324b87be8203006192606&q="
 
 import axios from 'axios';
-import lodash from 'lodash';
 
 export default {
   data () {
@@ -62,14 +61,16 @@ export default {
     } 
   },
   computed: {
-    orderedTemp: function () {
-      return _.orderBy(this.items, ['current.temp_c'], ['desc'])
-    }
+    sortHumidex() {
+      return this.items.slice().sort((a,b) => {
+        return this.getHumidex(b) - this.getHumidex(a)
+      })
+    } 
   },
   methods: {
     getHumidex: function (el) {
-      const e = 6.112 * Math.pow(10,(7.5*el.temp_c/(237.7+el.temp_c)))*(el.humidity/100)
-      return Math.round(el.temp_c + 5/9 * (e-10))
+      const e = 6.112 * Math.pow(10,(7.5*el.current.temp_c/(237.7+el.current.temp_c)))*(el.current.humidity/100)
+      return Math.round(el.current.temp_c + 5/9 * (e-10))
     },
     getClass: function(e) {
       if (e <= 29 )
