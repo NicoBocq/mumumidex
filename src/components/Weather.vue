@@ -17,7 +17,7 @@
             :class="getClass(getHumidex(item))"
           >
             <div>
-              {{index + 1}}
+              {{ index + 1 }}
             </div>
             <div class="city">
               {{item.location.name}}
@@ -65,7 +65,7 @@ export default {
   computed: {
     sortHumidex() {
       return this.items.slice().sort((a,b) => {
-        return this.getHumidex(b) - this.getHumidex(a)
+        return this.getHumidex(b) - this.getHumidex(a) || b.current.temp_c - a.current.temp_c
       })
     }
   },
@@ -86,7 +86,11 @@ export default {
         return 'bg-4'
       else
         return 'bg-5' 
-    }
+    },
+  //   ranking: () => {
+  //     return this.items.sort((a,b) => a.current.temp_c === b.current.temp_c ? a.name.localeCompare(b.name) : b.current.temp_c - a.current.temp_c)
+  // .map(x => { x.position = this.items.findIndex(y => y.current.temp_c === x.current.temp_c) + 1; return x;})
+  //   }
   },
   mounted: function () {
     const promises = [];
