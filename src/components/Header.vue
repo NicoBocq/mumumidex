@@ -16,7 +16,7 @@ h1 {
 
 .text-shadow-drop-center {
 	-webkit-animation: text-shadow-drop-center 0.6s both;
-	        animation: text-shadow-drop-center 0.6s both;
+	animation: text-shadow-drop-center 0.6s both;
 }
 
 @-webkit-keyframes text-shadow-drop-center {

@@ -10,7 +10,7 @@
       <div class="update">
         Mise à jour : {{ items[0].current.last_updated }}
       </div>
-        <transition-group name="flip-list" tag="div" class="items">            
+        <div class="items">            
           <div
             v-for="(item, index) in sortHumidex"
             :key="index"
@@ -36,7 +36,7 @@
               </div>
             </div> 
           </div>
-        </transition-group>      
+        </div>      
     </v-layout>
   </v-container>
 </template>
@@ -50,9 +50,9 @@ const cities = ['Marseille',
 'Miami',
 'San Francisco',
 'Lyon'];
-// const apiUrl = 'http://localhost:3000/current'
-const apiUrl = "https://api.apixu.com/v1/current.json?key=166fba8a30324b87be8203006192606&q="
 
+// const apiUrl = 'http://localhost:3000/current'
+const apiUrl = `https://api.apixu.com/v1/current.json?key=${process.env.VUE_APP_API_KEY}&q=`
 import axios from 'axios';
 
 export default {
