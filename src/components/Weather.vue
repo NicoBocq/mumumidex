@@ -1,12 +1,12 @@
 <template>
-  <v-container>
-    <h1 class="fade-in">
-      MumUMidex Challenge
-    </h1>
-    <div class="loading" v-if="!show">
-        <img src="@/assets/loading.png" />
-    </div>
-    <v-layout align-center justify-center column fill-height v-if="show">
+  <v-container fluid>
+      <h1 class="fade-in">
+        MumUMidex Challenge
+      </h1>
+    <v-layout align-center justify-center column fill-height  v-if="!show">
+        <img src="@/assets/loading.png" class="loading" />
+    </v-layout>
+    <v-layout align-center justify-top column fill-height v-if="show">
       <div class="update">
         Mise à jour : {{ items[0].current.last_updated }}
       </div>
@@ -113,18 +113,12 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.loading {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+h1 {
+  margin: 1rem 0;
+  font-size:2.1rem;
+  text-align: center;
 }
 
 .update {
@@ -134,7 +128,7 @@ export default {
 }
 
 .items {
-  font-size:1.3em;
+  font-size:1.3rem;
 }
 
 .items > div {
@@ -142,7 +136,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
-  border-radius: 0.2rem;
+  border-radius: 0.3rem;
 }
 
 .city {
@@ -188,9 +182,6 @@ export default {
    animation: rotation 1s infinite linear;
 }
 
-.loading img {
-  width:50px;
-}
 
 @keyframes rotation {
   from {
