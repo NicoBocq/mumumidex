@@ -8,34 +8,17 @@
     </v-layout>
     <v-layout align-center justify-top column fill-height v-if="show">
       <div class="update">
-        Mise à jour : {{ items[0].current.last_updated }}
+        <button @click="getApi()">Refresh</button>
       </div>
         <div class="items">            
-          <div
+          <item
             v-for="(item, index) in sortHumidex"
             :key="index"
             :class="getClass(getHumidex(item))"
-          >
-            <div>
-              {{ index + 1 }}
-            </div>
-            <div class="city">
-              {{item.location.name}}
-            </div>
-            <div class="humidex">
-              {{ getHumidex(item) }}
-            </div>
-            <div class="tempsuite">
-              <div class="temp">
-                <font-awesome-icon icon="thermometer-empty" />
-                {{item.current.temp_c}}°
-              </div>
-              <div class="humidity">
-                <font-awesome-icon icon="tint" />
-                {{item.current.humidity}}%
-              </div>
-            </div> 
-          </div>
+            :item="item"
+            :rank="index + 1"
+            :getHumidex="getHumidex"
+          />
         </div>      
     </v-layout>
   </v-container>
@@ -54,6 +37,7 @@ const cities = ['Marseille',
 // const apiUrl = 'http://localhost:3000/current'
 const apiUrl = `https://api.apixu.com/v1/current.json?key=${process.env.VUE_APP_API_KEY}&q=`
 import axios from 'axios';
+import Item from './Item.vue'
 
 export default {
   data () {
@@ -61,6 +45,9 @@ export default {
       items:[],
       show: false,
     } 
+  },
+  components: {
+    Item
   },
   computed: {
     sortHumidex() {
@@ -87,28 +74,35 @@ export default {
       else
         return 'bg-5' 
     },
-  //   ranking: () => {
-  //     return this.items.sort((a,b) => a.current.temp_c === b.current.temp_c ? a.name.localeCompare(b.name) : b.current.temp_c - a.current.temp_c)
-  // .map(x => { x.position = this.items.findIndex(y => y.current.temp_c === x.current.temp_c) + 1; return x;})
-  //   }
+    getApi: function () {
+      const promises = [];
+
+      cities.forEach(function(element){
+        const myUrl = apiUrl+element;
+        promises.push(axios.get(myUrl))
+      });
+      let self = this;
+
+      axios
+        .all(promises)
+        .then(axios.spread((...responses) => {
+          responses.forEach(res => self.items.push(res.data))
+      }))
+        .catch(error => console.log(error));
+    },
+    intervalGetApi: function () {
+      setInterval(() => {    
+          this.getApi()
+          }, 1000);
+      }
   },
-  mounted: function () {
-    const promises = [];
-
-    cities.forEach(function(element){
-      const myUrl = apiUrl+element;
-      promises.push(axios.get(myUrl))
-    });
-    let self = this;
-
-    axios
-      .all(promises)
-      .then(axios.spread((...responses) => {
-        responses.forEach(res => self.items.push(res.data))
-        // self.items = responses.data
-        // // response => (this.items = response.data)
-        self.show = true
-    }));
+  mounted() {
+    this.getApi()
+    this.show = true
+    // this.intervalGetApi() 
+  },
+  beforeDestroy() {
+    clearInterval(this.intervalFetchData())
   }
 }
 </script>
@@ -131,32 +125,7 @@ h1 {
   font-size:1.3rem;
 }
 
-.items > div {
-  margin-bottom:1rem;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: center;
-  border-radius: 0.3rem;
-}
 
-.city {
-  text-align: left;
-}
-
-.data {
-  padding: 0.5rem;
-}
-
-.tempsuite {
-  text-align: left;
-  font-size:0.9em;
-}
-
-.humidex {
-  font-size:2em;
-  font-weight:900;
-  padding: 0.5rem;
-}
 
 .bg-1 {
   background-color: dodgerblue;
@@ -198,7 +167,7 @@ h1 {
 
 .fade-in {
 	-webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 @-webkit-keyframes fade-in {
