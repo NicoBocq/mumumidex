@@ -8,12 +8,13 @@
     </v-layout>
     <v-layout align-center justify-top column fill-height v-if="show">
       <div class="update">
+        <input v-model="newCity" @keyup.enter="addCity">
         <button @click="getApi()">Refresh</button>
       </div>
         <div class="items">            
           <item
             v-for="(item, index) in sortHumidex"
-            :key="index"
+            :key="item.location.name + '_' + index"
             :class="getClass(getHumidex(item))"
             :item="item"
             :rank="index + 1"
@@ -44,6 +45,8 @@ export default {
     return {
       items:[],
       show: false,
+      cities: cities,
+      newCity:''
     } 
   },
   components: {
@@ -57,10 +60,23 @@ export default {
     }
   },
   methods: {
+    addCity() {
+      if (this.newCity.trim().length == 0) {
+        return
+      }
+      this.cities.push(this.newCity)
+      this.newCity = ''
+      this.getApi()
+    },
     getHumidex: (el) => {
       const e = 6.112 * Math.pow(10,(7.5*el.current.temp_c/(237.7+el.current.temp_c)))
       *(el.current.humidity/100)
       return Math.round(el.current.temp_c + 5/9 * (e-10))
+    },
+    indexGeo: (e) => {
+      const lat = Math.round(Math.abs(e.location.lat))
+      const lon = Math.round(Math.abs(e.location.lon))
+      return lat.toString() + lon.toString()
     },
     getClass: (e) => {
       if (e <= 29 )
@@ -77,7 +93,7 @@ export default {
     getApi: function () {
       const promises = [];
 
-      cities.forEach(function(element){
+      this.cities.forEach(function(element){
         const myUrl = apiUrl+element;
         promises.push(axios.get(myUrl))
       });
@@ -86,23 +102,24 @@ export default {
       axios
         .all(promises)
         .then(axios.spread((...responses) => {
-          responses.forEach(res => self.items.push(res.data))
+          // responses.forEach(res => self.items.push(res.data))
+          self.items = responses.map(res => res.data)
       }))
         .catch(error => console.log(error));
     },
-    intervalGetApi: function () {
+    intervalGetApi: () => {
       setInterval(() => {    
           this.getApi()
           }, 1000);
       }
   },
-  mounted() {
+  created() {
     this.getApi()
     this.show = true
     // this.intervalGetApi() 
   },
   beforeDestroy() {
-    clearInterval(this.intervalFetchData())
+    clearInterval(this.intervalFetchData)
   }
 }
 </script>
