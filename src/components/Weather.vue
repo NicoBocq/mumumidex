@@ -9,7 +9,10 @@
     <v-layout align-center justify-top column fill-height v-if="show">
       <div class="update">
         <input v-model="newCity" @keyup.enter="addCity">
-        <button @click="getApi()">Refresh</button>
+        <br />
+        <button @click="getApi()">
+          <font-awesome-icon icon="sync" />
+        </button>
       </div>
         <div class="items">            
           <item
@@ -73,11 +76,11 @@ export default {
       *(el.current.humidity/100)
       return Math.round(el.current.temp_c + 5/9 * (e-10))
     },
-    indexGeo: (e) => {
-      const lat = Math.round(Math.abs(e.location.lat))
-      const lon = Math.round(Math.abs(e.location.lon))
-      return lat.toString() + lon.toString()
-    },
+    // indexGeo: (e) => {
+    //   const lat = Math.round(Math.abs(e.location.lat))
+    //   const lon = Math.round(Math.abs(e.location.lon))
+    //   return lat.toString() + lon.toString()
+    // },
     getClass: (e) => {
       if (e <= 29 )
         return 'bg-1'
@@ -134,7 +137,7 @@ h1 {
 
 .update {
   font-size:0.8;
-  text-align: right;
+  text-align: center;
   margin-bottom: 0.25rem;
 }
 

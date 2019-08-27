@@ -5,7 +5,7 @@
       </div>
       <div class="city">
         {{item.location.name}}<br />
-        {{ item.location.localtime }}<br />{{ item.current.last_updated }}
+        <span class="localtime">{{ item.location.localtime }}</span>
       </div>
       <div class="humidex">
         {{ getHumidex(item) }}
@@ -57,5 +57,9 @@ export default {
   font-size:2em;
   font-weight:900;
   padding: 0.5rem;
+}
+
+.localtime {
+  font-size:0.9rem;
 }
 </style>
