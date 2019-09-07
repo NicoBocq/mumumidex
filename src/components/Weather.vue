@@ -98,13 +98,12 @@ export default {
       if (this.newCity.trim().length == 0) {
         return
       }
-      if (this.cities.includes(this.newCity)) {
-        this.error = true
-        this.newCity =''
-      }
+      // if (this.cities.includes(this.newCity)) {
+      //   this.error = true
+      //   this.newCity =''
+      // }
       this.cities.push(this.newCity)
       this.newCity = ''
-      this.error = false
       this.persist()
       this.getApi()
     },
