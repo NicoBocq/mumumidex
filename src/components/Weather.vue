@@ -37,6 +37,8 @@
       </template>
       <v-list light>
           <v-flex xs12>
+
+            <span v-if="error">NON</span>
             <v-text-field
               label="Solo"
               placeholder="Saisissez une ville"
@@ -78,6 +80,7 @@ export default {
       cities: cities,
       newCity:'',
       sheet: false,
+      error: false
     } 
   },
   components: {
@@ -95,13 +98,19 @@ export default {
       if (this.newCity.trim().length == 0) {
         return
       }
+      if (this.cities.includes(this.newCity)) {
+        this.error = true
+        this.newCity =''
+      }
       this.cities.push(this.newCity)
       this.newCity = ''
+      this.error = false
       this.persist()
       this.getApi()
     },
     persist() {
-      localStorage.newCity = this.newCity;
+      const parsed = JSON.stringify(this.cities);
+      localStorage.setItem('cities', parsed);
     },
     getHumidex: (el) => {
       const e = 6.112 * Math.pow(10,(7.5*el.current.temp_c/(237.7+el.current.temp_c)))
@@ -144,8 +153,12 @@ export default {
       }
   },
   mounted() {
-    if (localStorage.newCity) {
-      this.newCity = localStorage.newCity;
+    if (localStorage.getItem('cities')) {
+      try {
+        this.cities = JSON.parse(localStorage.getItem('cities'));
+      } catch(e) {
+        localStorage.removeItem('cities');
+      }
     }
   },
   created() {
