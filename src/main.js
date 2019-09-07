@@ -1,19 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
-
 import Vuetify from 'vuetify'
-
-Vue.use(Vuetify)
-
-import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+import 'vuetify/dist/vuetify.min.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThermometerEmpty, faTint, faThermometerThreeQuarters, faHandMiddleFinger, faSync } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faThermometerEmpty, faTint, faThermometerThreeQuarters, faHandMiddleFinger, faSync)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
+library.add(fas) // Include needed icons.
+
+Vue.use(Vuetify, {
+  iconfont: 'faSvg'
+})
 
 Vue.config.productionTip = false
 

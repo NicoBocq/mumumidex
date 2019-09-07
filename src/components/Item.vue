@@ -1,11 +1,11 @@
 <template>
     <div class="item">
-      <div>
+      <div class="rank">
         {{rank}}
       </div>
       <div class="city">
         {{item.location.name}}<br />
-        <span class="localtime">{{ item.location.localtime }}</span>
+        <!-- <span class="localtime">{{ item.location.localtime }}</span> -->
       </div>
       <div class="humidex">
         {{ getHumidex(item) }}
@@ -16,6 +16,7 @@
           {{item.current.temp_c}}°
         </div>
         <div class="humidity">
+          <!-- <v-icon>fas fa-tint</v-icon> -->
           <font-awesome-icon icon="tint" />
           {{item.current.humidity}}%
         </div>
@@ -38,6 +39,11 @@ export default {
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   border-radius: 0.3rem;
+  color: #FFF;
+}
+
+.rank {
+  text-align: center;
 }
 
 .city {

@@ -1,8 +1,8 @@
 <template>
-  <v-app id="app">
-    <video playsinline autoplay muted loop>
+  <v-app id="app" dark>
+    <!-- <video playsinline autoplay muted loop>
         <source :src='require("@/assets/background.mp4")' type='video/mp4'>
-    </video>
+    </video> -->
     <v-content>
       <v-snackbar
         v-model="snackWithButtons"
@@ -28,21 +28,26 @@
           Fermer
         </v-btn>
       </v-snackbar>
+      <v-container fluid>
+        <Header />
+        <Weather />
+        <Footer />
+      </v-container>
     </v-content>
-    <Weather />
-    <Footer />
   </v-app>
 </template>
 
 <script>
 import Weather from './components/Weather.vue'
 import Footer from './components/Footer.vue'
+import Header from './components/Header.vue'
 
 export default {
   name: 'app',
   components: {
     Weather,
     Footer,
+    Header
   },
   data () {
     return {
@@ -95,14 +100,15 @@ body {
     margin:0;
     background-color: #000;
 }
+a {
+  color: #fff !important;
+  text-decoration: none;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #fff;
-  font-size:14px;
-  background: rgba(0, 0, 0, 0.6);
 }
 
  video {

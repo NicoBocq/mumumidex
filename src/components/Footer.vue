@@ -1,19 +1,16 @@
+
 <template>
- <footer>
-  <a href="https://github.com/NicoBocq" target="-blank">
-   @NicoBocq
-  </a>
- </footer>
+	<v-footer class="pa-3" color="transparent">
+      <v-spacer></v-spacer>
+      <div> 
+				<!-- {{ new Date().getFullYear() }} -->
+				<a href="https://github.com/NicoBocq" target="_blank" color="white">
+					@NicoBocq
+				</a>
+			</div>
+	</v-footer>
 </template>
 
 <style scoped>
-footer {
-text-align: right;
- padding: 1rem;
-}
 
-footer a {
- color: #FFF;
- text-decoration: none;
-}
 </style>

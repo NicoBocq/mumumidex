@@ -1,10 +1,14 @@
 <template>
- <header>
-  <h1 class="text-shadow-drop-center">
+  <v-toolbar flat color="transparent">
+    <v-toolbar-title>MumUMidex Challenge</v-toolbar-title>
+  </v-toolbar>
+</template>
+ 
+ <!-- <header>
+  <h1>
     MumUMidex Challenge
   </h1>
- </header>
-</template>
+ </header> -->
 
 <style>
 

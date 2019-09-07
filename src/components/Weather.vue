@@ -1,19 +1,16 @@
 <template>
-  <v-container fluid>
-      <h1 class="fade-in">
-        MumUMidex Challenge
-      </h1>
+<div>
     <v-layout align-center justify-center column fill-height  v-if="!show">
         <img src="@/assets/loading.png" class="loading" />
     </v-layout>
     <v-layout align-center justify-top column fill-height v-if="show">
-      <div class="update">
-        <input v-model="newCity" @keyup.enter="addCity">
+      <!--<div class="update">
+         <input v-model="newCity" @keyup.enter="addCity">
         <br />
         <button @click="getApi()">
           <font-awesome-icon icon="sync" />
         </button>
-      </div>
+      </div> -->
         <div class="items">            
           <item
             v-for="(item, index) in sortHumidex"
@@ -23,9 +20,39 @@
             :rank="index + 1"
             :getHumidex="getHumidex"
           />
-        </div>      
+        </div>
+<template>
+  
+    <v-bottom-sheet v-model="sheet">
+      <template v-slot:activator>
+        <v-btn
+          dark
+          flat
+        >
+        <font-awesome-icon icon="plus" />
+          <!-- <v-icon large>
+            fas fa-plus
+          </v-icon> -->
+        </v-btn>
+      </template>
+      <v-list light>
+          <v-flex xs12>
+            <v-text-field
+              label="Solo"
+              placeholder="Saisissez une ville"
+              solo
+              v-model="newCity"
+              @keyup.enter="addCity"
+              flat
+              text-center
+            >
+            </v-text-field>
+          </v-flex>
+      </v-list>
+    </v-bottom-sheet>
+</template>
     </v-layout>
-  </v-container>
+</div>
 </template>
 
 <script>
@@ -49,7 +76,8 @@ export default {
       items:[],
       show: false,
       cities: cities,
-      newCity:''
+      newCity:'',
+      sheet: false,
     } 
   },
   components: {
@@ -69,18 +97,17 @@ export default {
       }
       this.cities.push(this.newCity)
       this.newCity = ''
+      this.persist()
       this.getApi()
+    },
+    persist() {
+      localStorage.newCity = this.newCity;
     },
     getHumidex: (el) => {
       const e = 6.112 * Math.pow(10,(7.5*el.current.temp_c/(237.7+el.current.temp_c)))
       *(el.current.humidity/100)
       return Math.round(el.current.temp_c + 5/9 * (e-10))
     },
-    // indexGeo: (e) => {
-    //   const lat = Math.round(Math.abs(e.location.lat))
-    //   const lon = Math.round(Math.abs(e.location.lon))
-    //   return lat.toString() + lon.toString()
-    // },
     getClass: (e) => {
       if (e <= 29 )
         return 'bg-1'
@@ -116,6 +143,11 @@ export default {
           }, 1000);
       }
   },
+  mounted() {
+    if (localStorage.newCity) {
+      this.newCity = localStorage.newCity;
+    }
+  },
   created() {
     this.getApi()
     this.show = true
@@ -129,12 +161,6 @@ export default {
 
 <style scoped>
 
-h1 {
-  margin: 1rem 0;
-  font-size:2.1rem;
-  text-align: center;
-}
-
 .update {
   font-size:0.8;
   text-align: center;
@@ -143,6 +169,7 @@ h1 {
 
 .items {
   font-size:1.3rem;
+  margin:1rem 0;
 }
 
 
