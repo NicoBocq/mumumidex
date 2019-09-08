@@ -4,7 +4,9 @@
         {{rank}}
       </div>
       <div class="city">
-        {{item.location.name}}<br />
+        {{item.location.name}}
+
+        
         <!-- <span class="localtime">{{ item.location.localtime }}</span> -->
       </div>
       <div class="humidex">
@@ -21,6 +23,17 @@
           {{item.current.humidity}}%
         </div>
       </div> 
+      <div class="delete">
+        <v-btn
+        dark
+        flat
+        small
+        icon
+        @click=removeCity(item)
+        >
+          <font-awesome-icon icon="trash-alt" />
+        </v-btn>
+      </div>
     </div>
 </template>
 
@@ -28,7 +41,7 @@
 <script>
 export default {
     name: 'Item',
-    props: ['item','getHumidex','rank'],
+    props: ['item','getHumidex','rank','removeCity'],
 }
 </script>   
 
@@ -36,10 +49,11 @@ export default {
 .items > div {
   margin-bottom:1rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 4fr 2fr 2fr 0.5fr;
   align-items: center;
   border-radius: 0.3rem;
   color: #FFF;
+  width: 100%;
 }
 
 .rank {
@@ -63,6 +77,7 @@ export default {
   font-size:2em;
   font-weight:900;
   padding: 0.5rem;
+  text-align: center;
 }
 
 .localtime {

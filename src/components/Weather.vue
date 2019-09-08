@@ -19,6 +19,7 @@
             :item="item"
             :rank="index + 1"
             :getHumidex="getHumidex"
+            :removeCity="removeCity"
           />
         </div>
 <template>
@@ -95,7 +96,7 @@ export default {
   },
   methods: {
     addCity() {
-      if (this.newCity.trim().length == 0) {
+      if (!this.newCity) {
         return
       }
       // if (this.cities.includes(this.newCity)) {
@@ -104,10 +105,16 @@ export default {
       // }
       this.cities.push(this.newCity)
       this.newCity = ''
-      this.persist()
-      this.getApi()
+      this.sheet = false
+      this.saveCities()
+      this.getData()
     },
-    persist() {
+    removeCity(x) {
+      this.cities.splice(x, 1)
+      this.saveCities()
+      this.getData()
+    },
+    saveCities() {
       const parsed = JSON.stringify(this.cities);
       localStorage.setItem('cities', parsed);
     },
@@ -128,7 +135,7 @@ export default {
       else
         return 'bg-5' 
     },
-    getApi: function () {
+    getData: function () {
       const promises = [];
 
       this.cities.forEach(function(element){
@@ -145,13 +152,13 @@ export default {
       }))
         .catch(error => console.log(error));
     },
-    intervalGetApi: () => {
+    intervalgetData: () => {
       setInterval(() => {    
-          this.getApi()
+          this.getData()
           }, 1000);
       }
   },
-  mounted() {
+  created() {
     if (localStorage.getItem('cities')) {
       try {
         this.cities = JSON.parse(localStorage.getItem('cities'));
@@ -159,9 +166,7 @@ export default {
         localStorage.removeItem('cities');
       }
     }
-  },
-  created() {
-    this.getApi()
+    this.getData()
     this.show = true
     // this.intervalGetApi() 
   },
@@ -181,7 +186,8 @@ export default {
 
 .items {
   font-size:1.3rem;
-  margin:1rem 0;
+  margin:1rem auto;
+  max-width: 900px;
 }
 
 
