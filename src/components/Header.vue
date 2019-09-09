@@ -1,6 +1,14 @@
 <template>
   <v-toolbar flat color="transparent">
     <v-toolbar-title>MumUMidex Challenge</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <!-- <v-bottom-sheet v-model="sheet">
+    <template v-slot:activator>
+      <v-btn icon large>
+        <font-awesome-icon icon="plus" />
+      </v-btn>
+    </template>
+    </v-bottom-sheet> -->
   </v-toolbar>
 </template>
  
@@ -9,7 +17,15 @@
     MumUMidex Challenge
   </h1>
  </header> -->
-
+<script>
+export default {
+  data() {
+    return {
+      sheet: false,
+    }
+  }
+}
+</script>
 <style>
 
 h1 {

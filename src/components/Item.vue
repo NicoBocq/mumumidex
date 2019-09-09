@@ -10,7 +10,12 @@
         <!-- <span class="localtime">{{ item.location.localtime }}</span> -->
       </div>
       <div class="humidex">
-        {{ getHumidex(item) }}
+        <v-tooltip right>
+          <template v-slot:activator="{ on }">
+            <span v-on="on">{{ getHumidex(item) }}</span>
+          </template>
+          <span>Mise à jour à {{item.current.last_updated}}</span>
+        </v-tooltip>
       </div>
       <div class="tempsuite">
         <div class="temp">
@@ -25,11 +30,11 @@
       </div> 
       <div class="delete">
         <v-btn
-        dark
-        flat
-        small
-        icon
-        @click=removeCity(item)
+          dark
+          flat
+          small
+          icon
+          @click=removeCity(city)
         >
           <font-awesome-icon icon="trash-alt" />
         </v-btn>

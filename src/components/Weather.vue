@@ -4,14 +4,7 @@
         <img src="@/assets/loading.png" class="loading" />
     </v-layout>
     <v-layout align-center justify-top column fill-height v-if="show">
-      <!--<div class="update">
-         <input v-model="newCity" @keyup.enter="addCity">
-        <br />
-        <button @click="getApi()">
-          <font-awesome-icon icon="sync" />
-        </button>
-      </div> -->
-        <div class="items">            
+        <transition-group class="items" name="items" tag="div">        
           <item
             v-for="(item, index) in sortHumidex"
             :key="item.location.name + '_' + index"
@@ -20,8 +13,9 @@
             :rank="index + 1"
             :getHumidex="getHumidex"
             :removeCity="removeCity"
+            :index="index"
           />
-        </div>
+        </transition-group>
 <template>
   
     <v-bottom-sheet v-model="sheet">
@@ -29,6 +23,8 @@
         <v-btn
           dark
           flat
+          icon
+          large
         >
         <font-awesome-icon icon="plus" />
           <!-- <v-icon large>
@@ -38,7 +34,6 @@
       </template>
       <v-list light>
           <v-flex xs12>
-
             <span v-if="error">NON</span>
             <v-text-field
               label="Solo"
@@ -48,6 +43,7 @@
               @keyup.enter="addCity"
               flat
               text-center
+              ref="newCity"
             >
             </v-text-field>
           </v-flex>
@@ -118,6 +114,9 @@ export default {
       const parsed = JSON.stringify(this.cities);
       localStorage.setItem('cities', parsed);
     },
+    setFocus() {
+      this.$refs.addCity.focus();
+    },
     getHumidex: (el) => {
       const e = 6.112 * Math.pow(10,(7.5*el.current.temp_c/(237.7+el.current.temp_c)))
       *(el.current.humidity/100)
@@ -177,6 +176,10 @@ export default {
 </script>
 
 <style scoped>
+
+.items-list-move {
+  transition: transform 2s;
+}
 
 .update {
   font-size:0.8;
