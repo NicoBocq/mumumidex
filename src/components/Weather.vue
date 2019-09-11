@@ -176,22 +176,39 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
-.items-list-move {
-  transition: transform 2s;
+.items-enter-active,
+.items-leave-active,
+.items-move {
+  transition: 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95);
+  transition-property: opacity, transform;
 }
 
-.update {
-  font-size:0.8;
-  text-align: center;
-  margin-bottom: 0.25rem;
+.items-enter {
+  opacity: 0;
+  transform: translateX(50px) scaleY(0.5);
+}
+
+.items-enter-to {
+  opacity: 1;
+  transform: translateX(0) scaleY(1);
+}
+
+.items-leave-active {
+  position: absolute;
+}
+
+.items-leave-to {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: center top;
 }
 
 .items {
   font-size:1.3rem;
   margin:1rem auto;
-  max-width: 900px;
+  position: relative;
 }
 
 

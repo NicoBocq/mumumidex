@@ -12,11 +12,6 @@
   </v-toolbar>
 </template>
  
- <!-- <header>
-  <h1>
-    MumUMidex Challenge
-  </h1>
- </header> -->
 <script>
 export default {
   data() {
