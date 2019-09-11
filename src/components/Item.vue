@@ -5,16 +5,13 @@
       </div>
       <div class="city">
         {{item.location.name}}
-
-        
-        <!-- <span class="localtime">{{ item.location.localtime }}</span> -->
       </div>
       <div class="humidex">
         <v-tooltip right>
           <template v-slot:activator="{ on }">
             <span v-on="on">{{ getHumidex(item) }}</span>
           </template>
-          <span>Mise à jour à {{item.current.last_updated}}</span>
+          <span>Mise à jour à {{ item.current.last_updated }}</span>
         </v-tooltip>
       </div>
       <div class="tempsuite">
@@ -23,7 +20,6 @@
           {{item.current.temp_c}}°
         </div>
         <div class="humidity">
-          <!-- <v-icon>fas fa-tint</v-icon> -->
           <font-awesome-icon icon="tint" />
           {{item.current.humidity}}%
         </div>
@@ -34,7 +30,7 @@
           flat
           small
           icon
-          @click=removeCity(city)
+          @click=removeCity(idCity())
         >
           <font-awesome-icon icon="trash-alt" />
         </v-btn>
@@ -46,7 +42,12 @@
 <script>
 export default {
     name: 'Item',
-    props: ['item','getHumidex','rank','removeCity'],
+    props: ['item','getHumidex','rank','removeCity', 'cities'],
+    methods: {
+      idCity () {
+        return this.cities.indexOf(this.item.location.name)
+      }
+    }
 }
 </script>   
 

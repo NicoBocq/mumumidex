@@ -14,6 +14,7 @@
             :getHumidex="getHumidex"
             :removeCity="removeCity"
             :index="index"
+            :cities="cities"
           />
         </transition-group>
 <template>
@@ -101,9 +102,9 @@ export default {
       // }
       this.cities.push(this.newCity)
       this.newCity = ''
-      this.sheet = false
       this.saveCities()
       this.getData()
+      this.sheet = false
     },
     removeCity(x) {
       this.cities.splice(x, 1)
