@@ -7,7 +7,7 @@
     </transition>
     <v-spacer></v-spacer>
     
-    <template>
+    <!-- <template>
       <v-bottom-sheet v-model="sheet">
         <template v-slot:activator>
           <v-btn
@@ -25,7 +25,7 @@
               <v-text-field
                 placeholder="Saisissez une ville"
                 v-model="newCity"
-                
+                @keyup.enter="addCity"
                 flat
                 solo
                 text-center
@@ -35,7 +35,7 @@
             </v-flex>
         </v-list>
       </v-bottom-sheet>
-    </template>
+    </template> -->
   </v-toolbar>
 </template>
  
