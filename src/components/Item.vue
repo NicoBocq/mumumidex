@@ -11,7 +11,7 @@
           <template v-slot:activator="{ on }">
             <span v-on="on">{{ getHumidex(item) }}</span>
           </template>
-          <span>Mise à jour à {{ item.current.last_updated }}</span>
+          <span>Mise à jour : {{ item.current.last_updated }}</span>
         </v-tooltip>
       </div>
       <div class="tempsuite">

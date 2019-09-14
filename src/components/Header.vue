@@ -1,14 +1,41 @@
 <template>
   <v-toolbar flat color="transparent">
-    <v-toolbar-title>MumUMidex Challenge</v-toolbar-title>
+    <transition name="fade">
+      <v-toolbar-title>
+        MumUMidex Challenge
+      </v-toolbar-title>
+    </transition>
     <v-spacer></v-spacer>
-    <!-- <v-bottom-sheet v-model="sheet">
-    <template v-slot:activator>
-      <v-btn icon large>
-        <font-awesome-icon icon="plus" />
-      </v-btn>
+    
+    <template>
+      <v-bottom-sheet v-model="sheet">
+        <template v-slot:activator>
+          <v-btn
+            dark
+            flat
+            icon
+            large
+            @click="setFocus()"
+          >
+          <font-awesome-icon icon="plus" />
+          </v-btn>
+        </template>
+        <v-list light>
+            <v-flex xs12>
+              <v-text-field
+                placeholder="Saisissez une ville"
+                v-model="newCity"
+                
+                flat
+                solo
+                text-center
+                ref="newCity"
+              >
+              </v-text-field>
+            </v-flex>
+        </v-list>
+      </v-bottom-sheet>
     </template>
-    </v-bottom-sheet> -->
   </v-toolbar>
 </template>
  
@@ -18,37 +45,24 @@ export default {
     return {
       sheet: false,
     }
-  }
+  },
+  methods: {
+    setFocus() {
+      this.$refs.newCity.$el.focus();
+    }
+  },
 }
 </script>
-<style>
+<style scoped>
 
-h1 {
-  font-size:1.6em;
-  font-weight: 700;
-  margin:1rem 0;
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
-.text-shadow-drop-center {
-	-webkit-animation: text-shadow-drop-center 0.6s both;
-	animation: text-shadow-drop-center 0.6s both;
-}
-
-@-webkit-keyframes text-shadow-drop-center {
-  0% {
-    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  }
-  100% {
-    text-shadow: 0 0 18px rgba(0, 0, 0, 0.35);
-  }
-}
-@keyframes text-shadow-drop-center {
-  0% {
-    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  }
-  100% {
-    text-shadow: 0 0 18px rgba(0, 0, 0, 0.35);
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: 2s;
 }
 
 </style>

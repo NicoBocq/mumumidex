@@ -9,10 +9,7 @@
         :timeout="timeout"
         top
         class="snack"
-        :multi-line=true
       >
-        {{ snackWithBtnText }}
-        <v-spacer />
         <v-btn
           dark
           flat
@@ -25,11 +22,11 @@
           icon
           @click="snackWithButtons = false"
         >
-          Fermer
+          <font-awesome-icon icon="times" />
         </v-btn>
       </v-snackbar>
       <v-container fluid>
-        <Header  />
+        <Header />
         <Weather />
         <Footer />
       </v-container>
@@ -77,7 +74,7 @@ export default {
       // Store the ServiceWorkerRegistration instance for later use.
       this.registration = e.detail;
       this.snackBtnText = 'Mettre à jour';
-      this.snackWithBtnText = 'Nouvelle version disponible';
+      this.snackWithBtnText = 'Mettre à jour';
       this.snackWithButtons = true;
     },
     refreshApp () {

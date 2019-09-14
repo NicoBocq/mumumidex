@@ -13,44 +13,9 @@
             :rank="index + 1"
             :getHumidex="getHumidex"
             :removeCity="removeCity"
-            :index="index"
             :cities="cities"
           />
         </transition-group>
-<template>
-  
-    <v-bottom-sheet v-model="sheet">
-      <template v-slot:activator>
-        <v-btn
-          dark
-          flat
-          icon
-          large
-        >
-        <font-awesome-icon icon="plus" />
-          <!-- <v-icon large>
-            fas fa-plus
-          </v-icon> -->
-        </v-btn>
-      </template>
-      <v-list light>
-          <v-flex xs12>
-            <span v-if="error">NON</span>
-            <v-text-field
-              label="Solo"
-              placeholder="Saisissez une ville"
-              solo
-              v-model="newCity"
-              @keyup.enter="addCity"
-              flat
-              text-center
-              ref="newCity"
-            >
-            </v-text-field>
-          </v-flex>
-      </v-list>
-    </v-bottom-sheet>
-</template>
     </v-layout>
 </div>
 </template>
@@ -96,10 +61,11 @@ export default {
       if (!this.newCity) {
         return
       }
-      // if (this.cities.includes(this.newCity)) {
-      //   this.error = true
-      //   this.newCity =''
-      // }
+      if (this.cities.includes(this.newCity)) {
+        this.error = true
+        this.newCity =''
+      }
+      this.error = false
       this.cities.push(this.newCity)
       this.newCity = ''
       this.saveCities()
@@ -114,9 +80,6 @@ export default {
     saveCities() {
       const parsed = JSON.stringify(this.cities);
       localStorage.setItem('cities', parsed);
-    },
-    setFocus() {
-      this.$refs.addCity.focus();
     },
     getHumidex: (el) => {
       const e = 6.112 * Math.pow(10,(7.5*el.current.temp_c/(237.7+el.current.temp_c)))
