@@ -101,7 +101,7 @@ export default {
     getData: function () {
       const promises = [];
 
-      this.cities.forEach(function(element){
+      this.$store.getters.cities.forEach(function(element){
         const myUrl = apiUrl+element;
         promises.push(axios.get(myUrl))
       });

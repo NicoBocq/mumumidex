@@ -30,7 +30,7 @@
           flat
           small
           icon
-          @click=removeCity(idCity())
+          @click=deleteCity
         >
           <font-awesome-icon icon="trash-alt" />
         </v-btn>
@@ -41,13 +41,13 @@
 
 <script>
 export default {
-    name: 'Item',
-    props: ['item','getHumidex','rank','removeCity', 'cities'],
-    methods: {
-      idCity () {
-        return this.cities.indexOf(this.item.location.name)
-      }
+  name: 'Item',
+  props: ['item','getHumidex','rank','removeCity', 'cities'],
+  methods: {
+    deleteCity: function(event) {
+      this.$store.commit('remove', event.target.value)
     }
+  }
 }
 </script>   
 

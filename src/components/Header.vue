@@ -6,51 +6,18 @@
       </v-toolbar-title>
     </transition>
     <v-spacer></v-spacer>
-    
-    <!-- <template>
-      <v-bottom-sheet v-model="sheet">
-        <template v-slot:activator>
-          <v-btn
-            dark
-            flat
-            icon
-            large
-            @click="setFocus()"
-          >
-          <font-awesome-icon icon="plus" />
-          </v-btn>
-        </template>
-        <v-list light>
-            <v-flex xs12>
-              <v-text-field
-                placeholder="Saisissez une ville"
-                v-model="newCity"
-                @keyup.enter="addCity"
-                flat
-                solo
-                text-center
-                ref="newCity"
-              >
-              </v-text-field>
-            </v-flex>
-        </v-list>
-      </v-bottom-sheet>
-    </template> -->
+      <Add />
   </v-toolbar>
 </template>
  
 <script>
+
+import Add from './Add'
+
 export default {
-  data() {
-    return {
-      sheet: false,
-    }
-  },
-  methods: {
-    setFocus() {
-      this.$refs.newCity.$el.focus();
-    }
-  },
+    components: {
+    Add
+  }
 }
 </script>
 <style scoped>

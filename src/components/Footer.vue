@@ -1,6 +1,9 @@
 
 <template>
 	<v-footer class="pa-3" color="transparent">
+			<div v-for="(item, index) in $store.getters.cities" :key="index">
+				<span @click.exact="deleteVille">{{ item }}</span>
+			</div>
 			<v-spacer></v-spacer>
 			<div>
         <v-btn
@@ -27,8 +30,10 @@ export default {
 	methods: {
 		clear () {
 			localStorage.clear()
-			
-		}
+		},
+    deleteVille: function(event) {
+      this.$store.commit('remove', event.target.value)
+    }
 	},
 }
 </script>
