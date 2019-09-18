@@ -21,7 +21,6 @@
             solo
             text-center
             ref="newCity"
-						persistent-hint
           >
           </v-text-field>
         </v-flex>

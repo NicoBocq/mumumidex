@@ -12,8 +12,6 @@
             :item="item"
             :rank="index + 1"
             :getHumidex="getHumidex"
-            :removeCity="removeCity"
-            :cities="cities"
           />
         </transition-group>
     </v-layout>
@@ -31,10 +29,11 @@ const cities = ['Marseille',
 'Lyon'];
 
 // const apiUrl = 'http://localhost:3000/current'
-const apiUrl = `https://api.apixu.com/v1/current.json?key=${process.env.VUE_APP_API_KEY}&q=`
+const apiUrl = `http://api.weatherstack.com/current?access_key=${process.env.VUE_APP_API_KEY}&query=`
 import axios from 'axios';
 import Item from './Item.vue'
 
+// import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -52,39 +51,15 @@ export default {
   computed: {
     sortHumidex() {
       return this.items.slice().sort((a,b) => {
-        return this.getHumidex(b) - this.getHumidex(a) || b.current.temp_c - a.current.temp_c
+        return this.getHumidex(b) - this.getHumidex(a) || b.current.temperature - a.current.temperature
       })
     }
   },
   methods: {
-    addCity() {
-      if (!this.newCity) {
-        return
-      }
-      if (this.cities.includes(this.newCity)) {
-        this.error = true
-        this.newCity =''
-      }
-      this.error = false
-      this.cities.push(this.newCity)
-      this.newCity = ''
-      this.saveCities()
-      this.getData()
-      this.sheet = false
-    },
-    removeCity(x) {
-      this.cities.splice(x, 1)
-      this.saveCities()
-      this.getData()
-    },
-    saveCities() {
-      const parsed = JSON.stringify(this.cities);
-      localStorage.setItem('cities', parsed);
-    },
     getHumidex: (el) => {
-      const e = 6.112 * Math.pow(10,(7.5*el.current.temp_c/(237.7+el.current.temp_c)))
+      const e = 6.112 * Math.pow(10,(7.5*el.current.temperature/(237.7+el.current.temperature)))
       *(el.current.humidity/100)
-      return Math.round(el.current.temp_c + 5/9 * (e-10))
+      return Math.round(el.current.temperature + 5/9 * (e-10))
     },
     getClass: (e) => {
       if (e <= 29 )
@@ -122,13 +97,7 @@ export default {
       }
   },
   created() {
-    if (localStorage.getItem('cities')) {
-      try {
-        this.cities = JSON.parse(localStorage.getItem('cities'));
-      } catch(e) {
-        localStorage.removeItem('cities');
-      }
-    }
+    // this.$store.dispatch('getData')
     this.getData()
     this.show = true
     // this.intervalGetApi() 

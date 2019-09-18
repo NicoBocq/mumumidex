@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
+
+const apiUrl = `http://api.weatherstack.com/current?access_key=${process.env.VUE_APP_API_KEY}&query=`
 
 let cities = ['Marseille',
 'Valence',
@@ -34,9 +37,33 @@ const saveState = (state) => {
 
 export const store = new Vuex.Store({
   state: {
-		cities: loadState() || [],
+    cities: loadState() || cities,
+    items: []
+  },
+  actions: {
+    getData ({ commit }) {
+      const promises = [];
+
+      this.state.cities.forEach(function(element){
+        const myUrl = apiUrl+element;
+        promises.push(axios.get(myUrl))
+      });
+
+      axios
+        .all(promises)
+        .then(axios.spread((...responses) => {
+          responses.map(res => res.data)
+        }))
+        .then(items => {
+          commit('SET_ITEMS', items)
+        })
+        .catch(error => console.log(error));
+    }
   },
   mutations: {
+    SET_ITEMS (state, items) {
+      state.items = items
+    },
     add(state, city) {
 			if (!city || cities.includes(city)) {
         return

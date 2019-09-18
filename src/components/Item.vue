@@ -11,13 +11,13 @@
           <template v-slot:activator="{ on }">
             <span v-on="on">{{ getHumidex(item) }}</span>
           </template>
-          <span>Mise à jour : {{ item.current.last_updated }}</span>
+          <span>Mise à jour : {{ item.current.observation_time }}</span>
         </v-tooltip>
       </div>
       <div class="tempsuite">
         <div class="temp">
           <font-awesome-icon icon="thermometer-empty" />
-          {{item.current.temp_c}}°
+          {{item.current.temperature}}°
         </div>
         <div class="humidity">
           <font-awesome-icon icon="tint" />
@@ -42,10 +42,10 @@
 <script>
 export default {
   name: 'Item',
-  props: ['item','getHumidex','rank','removeCity', 'cities'],
+  props: ['item','getHumidex','rank'],
   methods: {
-    deleteCity: function(event) {
-      this.$store.commit('remove', event.target.value)
+    deleteCity: function () {
+      this.$store.commit('remove', this.item.location.name)
     }
   }
 }
