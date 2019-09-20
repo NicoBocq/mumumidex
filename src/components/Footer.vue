@@ -23,7 +23,6 @@
 </template>
 <script>
 export default {
-	// props: ['getData'],
 	methods: {
 		clear () {
 			localStorage.clear()

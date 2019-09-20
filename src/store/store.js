@@ -75,10 +75,20 @@ export const store = new Vuex.Store({
     remove (state, city) {
 			state.cities.splice(state.cities.indexOf(city), 1)
 			saveState(state.cities)
-    }
+    },
+    // getHumidex (item) {
+    //   const e = 6.112 * Math.pow(10,(7.5*item.current.temperature/(237.7+item.current.temperature)))
+    //   *(item.current.humidity/100)
+    //   return Math.round(item.current.temperature + 5/9 * (e-10))
+    // }
   },
   getters: {
     cities: state => state.cities,
-    items: state => state.items
+    sorted_items(state) {
+      return state.items.slice().sort((a,b) => {
+        // return this.getHumidex(b) - this.getHumidex(a) || b.current.temperature - a.current.temperature
+        return b.current.temperature - a.current.temperature || b.current.humidity - a.current.humidity
+      })
+    }
   }
 })

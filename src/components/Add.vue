@@ -41,9 +41,9 @@
       this.$refs.newCity.$el.focus();
     },
     addCity: function(event) {
-			this.$store.commit('add', event.target.value)
-			this.sheet=false
+      this.$store.commit('add', event.target.value)
       this.newCity=''
+			this.sheet=false
       this.$store.dispatch('getData')
     }
   },

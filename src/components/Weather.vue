@@ -6,7 +6,7 @@
     <v-layout align-center justify-top column fill-height v-if="show">
         <transition-group class="items" name="items" tag="div">        
           <item
-            v-for="(item, index) in items"
+            v-for="(item, index) in $store.getters.sorted_items"
             :key="item.location.name + '_' + index"
             :class="getClass(getHumidex(item))"
             :item="item"
@@ -19,13 +19,9 @@
 </template>
 
 <script>
-
-// const apiUrl = 'http://localhost:3000/current'
-const apiUrl = `http://api.weatherstack.com/current?access_key=${process.env.VUE_APP_API_KEY}&query=`
-import axios from 'axios';
 import Item from './Item.vue'
-
 import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
@@ -36,13 +32,6 @@ export default {
   components: {
     Item
   },
-  // computed: {
-  //   sortHumidex() {
-  //     return this.items.slice().sort((a,b) => {
-  //       return this.getHumidex(b) - this.getHumidex(a) || b.current.temperature - a.current.temperature
-  //     })
-  //   }
-  // },
   computed: mapState([
     'items'
   ]),
@@ -65,7 +54,7 @@ export default {
         return 'bg-5' 
     }
   },
-  created() {
+  mounted() {
     this.$store.dispatch('getData')
     this.show = true
   }
