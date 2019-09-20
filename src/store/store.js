@@ -4,7 +4,7 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-const apiUrl = `http://api.weatherstack.com/current?access_key=${process.env.VUE_APP_API_KEY}&query=`
+const apiUrl = `https://api.weatherstack.com/current?access_key=${process.env.VUE_APP_API_KEY}&query=`
 
 const cities = ['Marseille',
 'Valence',
