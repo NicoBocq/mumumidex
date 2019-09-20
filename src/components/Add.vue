@@ -44,6 +44,7 @@
 			this.$store.commit('add', event.target.value)
 			this.sheet=false
       this.newCity=''
+      this.$store.dispatch('getData')
     }
   },
 }

@@ -46,6 +46,7 @@ export default {
   methods: {
     deleteCity: function () {
       this.$store.commit('remove', this.item.location.name)
+      this.$store.dispatch('getData')
     }
   }
 }

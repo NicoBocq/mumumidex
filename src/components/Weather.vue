@@ -6,7 +6,7 @@
     <v-layout align-center justify-top column fill-height v-if="show">
         <transition-group class="items" name="items" tag="div">        
           <item
-            v-for="(item, index) in sortHumidex"
+            v-for="(item, index) in items"
             :key="item.location.name + '_' + index"
             :class="getClass(getHumidex(item))"
             :item="item"
@@ -20,41 +20,32 @@
 
 <script>
 
-const cities = ['Marseille',
-'Valence',
-'Paris',
-'Montpellier',
-'Miami',
-'San Francisco',
-'Lyon'];
-
 // const apiUrl = 'http://localhost:3000/current'
 const apiUrl = `http://api.weatherstack.com/current?access_key=${process.env.VUE_APP_API_KEY}&query=`
 import axios from 'axios';
 import Item from './Item.vue'
 
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      items:[],
       show: false,
-      cities: cities,
-      newCity:'',
-      sheet: false,
       error: false
     } 
   },
   components: {
     Item
   },
-  computed: {
-    sortHumidex() {
-      return this.items.slice().sort((a,b) => {
-        return this.getHumidex(b) - this.getHumidex(a) || b.current.temperature - a.current.temperature
-      })
-    }
-  },
+  // computed: {
+  //   sortHumidex() {
+  //     return this.items.slice().sort((a,b) => {
+  //       return this.getHumidex(b) - this.getHumidex(a) || b.current.temperature - a.current.temperature
+  //     })
+  //   }
+  // },
+  computed: mapState([
+    'items'
+  ]),
   methods: {
     getHumidex: (el) => {
       const e = 6.112 * Math.pow(10,(7.5*el.current.temperature/(237.7+el.current.temperature)))
@@ -72,38 +63,11 @@ export default {
         return 'bg-4'
       else
         return 'bg-5' 
-    },
-    getData: function () {
-      const promises = [];
-
-      this.$store.getters.cities.forEach(function(element){
-        const myUrl = apiUrl+element;
-        promises.push(axios.get(myUrl))
-      });
-      let self = this;
-
-      axios
-        .all(promises)
-        .then(axios.spread((...responses) => {
-          // responses.forEach(res => self.items.push(res.data))
-          self.items = responses.map(res => res.data)
-      }))
-        .catch(error => console.log(error));
-    },
-    intervalgetData: () => {
-      setInterval(() => {    
-          this.getData()
-          }, 1000);
-      }
+    }
   },
   created() {
-    // this.$store.dispatch('getData')
-    this.getData()
+    this.$store.dispatch('getData')
     this.show = true
-    // this.intervalGetApi() 
-  },
-  beforeDestroy() {
-    clearInterval(this.intervalFetchData)
   }
 }
 </script>

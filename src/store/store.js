@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const apiUrl = `http://api.weatherstack.com/current?access_key=${process.env.VUE_APP_API_KEY}&query=`
 
-let cities = ['Marseille',
+const cities = ['Marseille',
 'Valence',
 'Paris',
 'Montpellier',
@@ -51,12 +51,13 @@ export const store = new Vuex.Store({
 
       axios
         .all(promises)
+        // .then(axios.spread((...responses) => {
+        //   // responses.forEach(res => self.items.push(res.data))
+        //   responses.map(res => res.data)
+        // }))
         .then(axios.spread((...responses) => {
-          responses.map(res => res.data)
+          commit('SET_ITEMS', responses.map(res => res.data))
         }))
-        .then(items => {
-          commit('SET_ITEMS', items)
-        })
         .catch(error => console.log(error));
     }
   },
@@ -64,19 +65,20 @@ export const store = new Vuex.Store({
     SET_ITEMS (state, items) {
       state.items = items
     },
-    add(state, city) {
+    add (state, city) {
 			if (!city || cities.includes(city)) {
         return
       }
 			state.cities.push(city)
 			saveState(state.cities)
 		},
-    remove(state, city) {
+    remove (state, city) {
 			state.cities.splice(state.cities.indexOf(city), 1)
 			saveState(state.cities)
     }
   },
   getters: {
-    cities: state => state.cities
+    cities: state => state.cities,
+    items: state => state.items
   }
 })
