@@ -1,51 +1,50 @@
 <template>
-  <v-bottom-sheet v-model="sheet">
-    <template v-slot:activator>
+  <div>
       <v-btn
-        dark
-        flat
         icon
+        fab
+        flat
         large
-        @click.exact="setFocus()"
+        color="yellow accent-3"
+        @click="dialog = !dialog"
       >
-      <font-awesome-icon icon="plus" />
+        <font-awesome-icon icon="plus" />
       </v-btn>
-    </template>
-    <v-list light>
-        <v-flex xs12>
-          <v-text-field
-            label="Saisissez une ville"
-            v-model="newCity"
-            @keyup.enter="addCity"
-            flat
-            solo
-            text-center
-            ref="newCity"
-          >
-          </v-text-field>
-        </v-flex>
-    </v-list>
-  </v-bottom-sheet>
+
+      <v-dialog light v-model="dialog" max-width="500px">
+        <v-card>
+          <v-card-text>
+            <v-text-field
+              label="Saisissez une ville"
+              v-model="newCity"
+              @keyup.enter="addCity"
+              flat
+              ref="newCity"
+              autofocus
+            >
+            </v-text-field>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+  </div>
 </template>
+
 
 <script>
  export default {
   data() {
     return {
-      sheet: false,
+      dialog: false,
       newCity:''
     }
   },
   methods: {
-    setFocus() {
-      this.$refs.newCity.$el.focus();
-    },
     addCity: function(event) {
       this.$store.commit('add', event.target.value)
       this.newCity=''
-			this.sheet=false
+			this.dialog=false
       this.$store.dispatch('getData')
     }
-  },
+  }
 }
 </script>
