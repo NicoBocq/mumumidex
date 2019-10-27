@@ -6,12 +6,11 @@
     <v-layout align-center justify-top column fill-height v-if="show">
         <transition-group class="items" name="items" tag="div">        
           <item
-            v-for="(item, index) in $store.getters.sorted_items"
+            v-for="(item, index) in sortedItems"
             :key="item.location.name + '_' + index"
-            :class="getClass(getHumidex(item))"
+            :class="getClass(item.humidex)"
             :item="item"
             :rank="index + 1"
-            :getHumidex="getHumidex"
           />
         </transition-group>
     </v-layout>
@@ -20,27 +19,22 @@
 
 <script>
 import Item from './Item.vue'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   data () {
     return {
-      show: false,
-      error: false
+      show: false
     } 
   },
   components: {
     Item
   },
-  computed: mapState([
-    'items'
-  ]),
+  computed: {
+    ...mapState(['items']),
+    ...mapGetters(['sortedItems'])
+  },
   methods: {
-    getHumidex: (el) => {
-      const e = 6.112 * Math.pow(10,(7.5*el.current.temperature/(237.7+el.current.temperature)))
-      *(el.current.humidity/100)
-      return Math.round(el.current.temperature + 5/9 * (e-10))
-    },
     getClass: (e) => {
       if (e <= 29 )
         return 'bg-1'
@@ -51,7 +45,7 @@ export default {
       else if (e > 45 && e <= 54)
         return 'bg-4'
       else
-        return 'bg-5' 
+        return 'bg-5'
     }
   },
   mounted() {

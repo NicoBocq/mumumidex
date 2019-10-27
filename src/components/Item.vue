@@ -9,7 +9,7 @@
       <div class="humidex">
         <v-tooltip right>
           <template v-slot:activator="{ on }">
-            <span v-on="on">{{ getHumidex(item) }}</span>
+            <span v-on="on">{{item.humidex}}</span>
           </template>
           <span>Mise à jour : {{ item.current.observation_time }}</span>
         </v-tooltip>
@@ -40,9 +40,13 @@
 
 
 <script>
+
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Item',
   props: ['item','getHumidex','rank'],
+  computed: mapGetters([ 'getStoreHumidex']),
   methods: {
     deleteCity: function () {
       this.$store.commit('remove', this.item.location.name)
