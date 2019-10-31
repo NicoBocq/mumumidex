@@ -19,7 +19,6 @@
               v-model="newCity"
               @keyup.enter="addCity"
               flat
-              ref="newCity"
               autofocus
             >
             </v-text-field>

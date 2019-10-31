@@ -41,12 +41,9 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
-
 export default {
   name: 'Item',
-  props: ['item','getHumidex','rank'],
-  computed: mapGetters([ 'getStoreHumidex']),
+  props: ['item','rank'],
   methods: {
     deleteCity: function () {
       this.$store.commit('remove', this.item.location.name)
