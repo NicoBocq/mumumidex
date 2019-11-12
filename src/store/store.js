@@ -42,6 +42,7 @@ const getHumidex = (item) => {
 }
 
 export const store = new Vuex.Store({
+  strict: true,
   state: {
     cities: loadState() || cities,
     items: []

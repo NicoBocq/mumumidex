@@ -1,5 +1,5 @@
 <template>
-    <div class="item">
+    <div class="item" :style="itemStyle" :class="itemClass">
       <div class="rank">
         {{rank}}
       </div>
@@ -44,6 +44,26 @@
 export default {
   name: 'Item',
   props: ['item','rank'],
+  computed: {
+    itemStyle() {
+      return {
+        '--i': this.rank
+      }
+    },
+    itemClass() {
+        if (this.item.humidex <= 29 ) {
+          return 'bg-1'
+        } else if (this.item.humidex <= 39) {
+          return 'bg-2'
+        } else if (this.item.humidex <= 45) {
+          return 'bg-3'
+        } else if (this.item.humidex <= 54) {
+          return 'bg-4'
+        } else {
+          return 'bg-5'
+        }
+    }
+  },
   methods: {
     deleteCity: function () {
       this.$store.commit('remove', this.item.location.name)
@@ -54,7 +74,9 @@ export default {
 </script>   
 
 <style scoped>
-.items > div {
+
+.item {
+  font-size: 1.3rem;
   margin-bottom:1rem;
   display: grid;
   grid-template-columns: 1fr 4fr 2fr 2fr 0.5fr;
@@ -90,5 +112,35 @@ export default {
 
 .localtime {
   font-size:0.9rem;
+}
+
+.slide-in-enter {
+  opacity: 0;
+  transform: scale(.5);
+}
+
+.slide-in-enter-active {
+  transition: all .4s ease;
+  transition-delay: calc(.1s * var(--i));
+}
+
+.bg-1 {
+  background-color: dodgerblue;
+}
+
+.bg-2 {
+  background-color: lightseagreen;
+}
+
+.bg-3 {
+  background-color:orange;
+}
+
+.bg-4 {
+  background-color: indianred;
+}
+
+.bg-5 {
+  background-color: brown;
 }
 </style>
