@@ -1,9 +1,7 @@
 <template>
-  <v-app id="app" dark>
-    <!-- <video playsinline autoplay muted loop>
-        <source :src='require("@/assets/background.mp4")' type='video/mp4'>
-    </video> -->
-    <v-content>
+  <v-app id="app" light>
+    <Header />
+    <v-main>
       <v-snackbar
         v-model="snackWithButtons"
         :timeout="timeout"
@@ -12,7 +10,6 @@
       >
         <v-btn
           dark
-          flat
           color="#00f500"
           @click.native="refreshApp"
         >
@@ -25,12 +22,11 @@
           <font-awesome-icon icon="times" />
         </v-btn>
       </v-snackbar>
-      <v-container fluid>
-        <Header />
+      <v-container fluid class="fill-height">
         <Weather />
-        <Footer />
       </v-container>
-    </v-content>
+    </v-main>
+    <Footer />
   </v-app>
 </template>
 
@@ -53,7 +49,7 @@ export default {
       snackBtnText: '',
       snackWithBtnText: '',
       snackWithButtons: false,
-      timeout: 0,
+      timeout: -1,
     };
   },
   created () {
@@ -88,43 +84,5 @@ export default {
 </script>
 
 <style>
-html, 
-body {
-    height: 100%;
-}
-body {
-    padding:0;
-    margin:0;
-    background-color: #000;
-}
-a {
-  color: #fff !important;
-  text-decoration: none;
-}
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
- video {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
-  overflow: hidden;
-  z-index: -100;
- }
-
-@media (max-width: 600px) {
-  html, 
-body {
-    height: auto;
-}
-
-}
-
 
 </style>

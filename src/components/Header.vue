@@ -1,36 +1,25 @@
 <template>
-  <v-toolbar flat color="transparent">
-    <transition name="fade">
-      <v-toolbar-title>
-        MumUMidex Challenge
-      </v-toolbar-title>
-    </transition>
-    <v-spacer></v-spacer>
-      <Add />
-  </v-toolbar>
+  <v-app-bar
+    color="transparent"
+    dense
+    flat
+  >
+    <v-toolbar-title>
+      MumUMidex Challenge
+    </v-toolbar-title>
+    <v-spacer />
+    <Add />
+  </v-app-bar>
 </template>
- 
+
 <script>
 
 import Add from './Add'
 
 export default {
-    components: {
+  components: {
     Add
   }
 }
 </script>
-<style scoped>
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: 2s;
-}
-
-</style>
 

@@ -1,19 +1,15 @@
 <template>
-<div>
-    <v-layout align-center justify-center column fill-height  v-if="!show">
-        <img src="@/assets/loading.png" class="loading" />
+    <v-layout align-center justify-center column fill-height v-if="!show">
+      <img src="@/assets/loading.png" class="loading" />
     </v-layout>
-    <v-layout align-center justify-top column fill-height v-if="show">
-        <transition-group appear class="items" name="slide-in" tag="div">        
-          <item
-            v-for="(item, index) in sortedItems"
-            :key="item.location.name + '_' + index"
-            :item="item"
-            :rank="index + 1"
-          />
-        </transition-group>
-    </v-layout>
-</div>
+    <transition-group appear name="slide-in" tag="div" v-else class="items">
+      <item
+        v-for="(item, index) in sortedItems"
+        :key="item.location.name + '_' + index"
+        :item="item"
+        :rank="index + 1"
+      />
+    </transition-group>
 </template>
 
 <script>
@@ -21,10 +17,11 @@ import Item from './Item.vue'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
+  name: 'List',
   data () {
     return {
       show: false
-    } 
+    }
   },
   components: {
     Item
@@ -43,6 +40,12 @@ export default {
 </script>
 
 <style>
+
+.items {
+  margin: 0 auto;
+  max-width: 600px;
+  min-width: 350px;
+}
 
 .loading {
    animation: rotation 1s infinite linear;
