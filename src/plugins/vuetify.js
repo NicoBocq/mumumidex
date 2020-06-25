@@ -1,20 +1,9 @@
-import Vue from "vue";
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
-import {
-    Vuetify,
-    VApp,
-    VCard,
-    VBottomSheet,
-    VAppBar
-} from "vuetify";
+Vue.use(Vuetify)
 
-Vue.use(Vuetify, {
-    components: {
-        VApp,
-        VCard,
-        VBottomSheet,
-        VAppBar
-       /* other imports */
-    },
-    /* theme option */
-});
+const opts = {}
+
+export default new Vuetify(opts)
